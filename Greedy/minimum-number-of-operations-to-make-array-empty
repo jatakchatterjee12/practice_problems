@@ -1,0 +1,57 @@
+// Approach 1.
+class Solution {
+    public int minOperations(int[] nums) {
+        
+        int n = nums.length;
+        Map<Integer, Integer> mp = new HashMap<>();
+
+        for(int num : nums){
+            mp.put(num, mp.getOrDefault(num,0)+1);
+        }
+        int result = 0; 
+
+        for(int it : mp.values()){
+
+            if(it == 1)return -1;
+
+            result += (it+2)/3; // ceil((double)val/3)
+        }
+        return result;
+    }
+}
+/* TC -> O(n)
+   SC -> O(n)
+*/
+
+//Approach 2.
+class Solution {
+    public int minOperations(int[] nums) {
+        
+        // WINDOW TECHNIQUE
+
+        int n = nums.length;
+        Arrays.sort(nums);
+
+        int i = 0;
+    
+        int result = 0;
+
+        while(i < n){
+
+            int j = i;
+            while(j<n && nums[i] == nums[j]){
+                j++;
+            }
+            int cnt = j-i;
+            if(cnt == 1)return -1;
+            result += (cnt+2)/3;
+            i = j;
+        }
+        return result;
+
+    }
+}
+/*
+TC -> O(nlogn)
+SC -> O(1)
+*/
