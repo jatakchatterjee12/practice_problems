@@ -23,8 +23,10 @@ public:
                         oddFreq++;
                     }
                 }
-
-                result += oddFreq <= 1;
+                if(oddFreq <= 1){
+                    result += 1;
+                }
+                //result += oddFreq <= 1;
             }
             
             
