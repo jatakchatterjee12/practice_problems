@@ -71,5 +71,43 @@ class Solution
         
 };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////  JAVA    /////////////////////////////////////////////////
+
+
+/*
+class Item {
+    int value, weight;
+    Item(int x, int y){
+        this.value = x;
+        this.weight = y;
+    }
+}
+*/
+
+class Solution
+{
+    //Function to get the maximum total value in the knapsack.
+    double fractionalKnapsack(int W, Item arr[], int n) 
+    {
+       Arrays.sort(arr,(a,b)->{
+           double r1 = (double)a.value/(double)a.weight;
+           double r2 = (double)b.value/(double)b.weight;
+           if(r1 < r2) return 1;
+           else return -1;
+       });
+       
+       double ans = 0;
+       for(int i=0; i< n; i++){
+           int val = arr[i].value;
+           int wt = arr[i].weight;
+           double val_per_unit_wt = (double)val/(double)wt;
+           
+           int take_weight = Math.min(wt, W);
+           W -= take_weight;
+           ans += (take_weight * val_per_unit_wt);
+           if(W <=0)break;
+       }
+       return ans;
+    }
+}
 
