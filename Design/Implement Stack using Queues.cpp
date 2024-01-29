@@ -107,3 +107,98 @@ public:
         return deq.empty();
     }
 };
+
+/****************************************************** JAVA ************************************************************//
+// Approach -1.(Using 2 queues O(n) pop opeartion)
+class MyStack {
+    Queue<Integer> q1 = new LinkedList<>();
+    Queue<Integer> q2 = new LinkedList<>();
+
+    public MyStack() {
+        
+    }
+    
+    public void push(int x) {
+        
+       if(q1.isEmpty()){
+            q1.offer(x);
+        }
+        else{
+            while(!q1.isEmpty()){
+                q2.offer(q1.poll());
+            }
+
+            q1.offer(x);
+
+            while(!q2.isEmpty()){
+                q1.offer(q2.poll());
+            }
+        }
+    }
+    
+    public int pop() {
+        if(!q1.isEmpty()){
+
+            int res = q1.poll();
+            return res;
+        }
+        return -1;
+    }
+    
+    public int top() {
+        
+        if(!q1.isEmpty()){
+
+            return q1.peek();
+        }
+        return -1;
+    }
+    
+    public boolean empty() {
+        
+        return q1.isEmpty();
+    }
+}
+//Approach-2 (Using single queue with O(n) push)
+class MyStack {
+    Queue<Integer> q = new LinkedList<>();
+    
+
+    public MyStack() {
+        
+    }
+    
+    public void push(int x) {
+        
+       q.offer(x);
+
+       int n = q.size();
+       for(int i = 0; i < n-1;i++){
+           q.offer(q.poll());
+       }
+    }
+    
+    public int pop() {
+        if(!q.isEmpty()){
+
+            int res = q.poll();
+            return res;
+        }
+        return -1;
+    }
+    
+    public int top() {
+        
+        if(!q.isEmpty()){
+
+            return q.peek();
+        }
+        return -1;
+    }
+    
+    public boolean empty() {
+        
+        return q.isEmpty();
+    }
+}
+
