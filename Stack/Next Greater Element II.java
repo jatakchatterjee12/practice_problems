@@ -3,7 +3,7 @@
     Leetcode Link : https://leetcode.com/problems/next-greater-element-ii/
     ALERT : In this, you have to find next greater element in Circular Array
 
-    Monotonic Decreasing Order of the Stack
+    Monotonic Decreasing Order of the Stack (Top to Bottom Increasing Order)
 */
 
 //Approach-1 [Time : O(n^2)]
