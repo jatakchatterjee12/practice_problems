@@ -2,6 +2,8 @@
     Company Tags  : Amazon, Flipkart, OYO Rooms, Snapdeal, Samsung, Zoho
     Leetcode Link : https://leetcode.com/problems/next-greater-element-ii/
     ALERT : In this, you have to find next greater element in Circular Array
+
+    Monotonic Decreasing Order of the Stack
 */
 
 //Approach-1 [Time : O(n^2)]
