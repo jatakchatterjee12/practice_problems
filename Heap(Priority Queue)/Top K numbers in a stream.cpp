@@ -86,3 +86,46 @@ class Solution {
         return res;
     }
 };
+
+//**************************************************8 JAVA ****************************************************88//
+// accepted in gfg
+class Pair{
+    int f;
+    int s;
+    Pair(int f, int s){
+        this.f = f;
+        this.s = s;
+    }
+}
+
+class Solution {
+    public static ArrayList<ArrayList<Integer>> kTop(int[] arr, int N, int K) {
+        
+        Map<Integer, Integer> mp = new HashMap<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> {
+            if(a.f == b.f) return b.s - a.s;
+            return a.f - b.f;
+        });
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        
+        for(int num  : arr){
+            mp.put(num, mp.getOrDefault(num,0)+1);
+            ArrayList<Integer> list = new ArrayList<>();
+            
+            for(Map.Entry<Integer, Integer> it : mp.entrySet()){
+                int val = it.getKey();
+                int frq = it.getValue();
+                pq.add(new Pair(frq, val));
+                
+                if(pq.size() > K) pq.poll();
+            }
+            while(!pq.isEmpty()){
+                list.add(pq.poll().s);
+            }
+            Collections.reverse(list);
+            res.add(list);
+        }
+        return res;
+    }
+}
+        
