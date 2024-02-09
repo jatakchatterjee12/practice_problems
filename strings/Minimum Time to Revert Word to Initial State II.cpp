@@ -8,7 +8,7 @@
 //Approach-1 (Brute Force - Baby Steps)
 //T.C : O(n^2)
 //S.C : O(1)
-//Link - https://github.com/jatakchatterjee12/practice_problems/blob/master/strings/Minimum%20Time%20to%20Revert%20Word%20to%20Initial%20State%20I.cpp
+//Link - https://github.com/jatakchatterjee12/practice_problems/blob/main/strings/Minimum%20Time%20to%20Revert%20Word%20to%20Initial%20State%20I.cpp
 
 
 //Approach-2 (Optimal using KMP LPS)
