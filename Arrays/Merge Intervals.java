@@ -36,6 +36,34 @@ public:
     }
 };
 //Approach 2 : TC - nlogn + O(n)
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        int n = intervals.size();
+        vector<vector<int>> result;
+
+        if(n == 0) return result;
+
+        sort(intervals.begin(), intervals.end());
+
+        vector<int> prev_pair = intervals[0];
+        
+        for(auto it : intervals){
+            int curr_start = it[0];
+            int curr_end = it[1];
+
+            if(curr_start <= prev_pair[1]){
+                prev_pair[1] = max(prev_pair[1], curr_end);
+            }
+            else{
+                result.push_back(prev_pair);
+                prev_pair = it;
+            }
+        }
+        result.push_back(prev_pair);
+        return result;
+    }
+};
 
 
 //************************************************ JAVA *******************************************//
