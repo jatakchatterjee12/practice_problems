@@ -1,25 +1,24 @@
 //Approach 1:
-public int kthSmallest(TreeNode root, int k) {
-      Stack<TreeNode> st = new Stack<>();
-      
-      while (root != null) {
-          st.push(root);
-          root = root.left;
-      }
-          
-      while (k != 0) {
-          TreeNode n = st.pop();
-          k--;
-          if (k == 0) return n.val;
-          TreeNode right = n.right;
-          while (right != null) {
-              st.push(right);
-              right = right.left;
-          }
-      }
-      
-      return -1; // never hit if k is valid
-}
+ public int kthSmallest(TreeNode root, int k) {
+     Stack<TreeNode> stack = new Stack<TreeNode>();
+     TreeNode p = root;
+     int count = 0;
+     
+     while(!stack.isEmpty() || p != null) {
+         if(p != null) {
+             stack.push(p);    // Just like recursion
+             p = p.left;   
+             
+         } else {
+            TreeNode node = stack.pop();
+            if(++count == k) return node.val; 
+            p = node.right;
+         }
+     }
+     
+     return Integer.MIN_VALUE;
+ }
+
 
 //Approach 2: 
   // better keep these two variables in a wrapper class
