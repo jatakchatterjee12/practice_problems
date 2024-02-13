@@ -1,7 +1,8 @@
 /*
-    GFG Link    :  https://www.geeksforgeeks.org/problems/clone-graph/1
+            GFG Link    :  https://www.geeksforgeeks.org/problems/clone-graph/1
 */
 
+//********************************************* C++ ******************************************************//
 // struct Node {
 //     int val;
 //     vector<Node*> neighbors;
@@ -51,3 +52,55 @@ public:
         return myStart;
     }
 };
+
+//******************************************** JAVA *********************************************************//
+/*
+    class Node{
+        int val;
+        ArrayList<Node> neighbors;
+        public Node(){
+            val = 0;
+            neighbors = new ArrayList<>();
+        }
+    
+        public Node(int val){
+            this.val = val;
+            neighbors = new ArrayList<>();
+        }
+    
+        public Node(int val, ArrayList<Node> neighbors){
+            this.val = val;
+            this.neighbors = neighbors;
+        }
+    }
+*/
+class Solution{
+    Map<Integer, Node> vis = new HashMap<>();
+    void dfs(Node myNode, Node org_node){
+        
+        vis.put(myNode.val, myNode);
+        
+        for(Node child : org_node.neighbors){
+            boolean not_vis = !vis.containsKey(child.val);
+            
+            Node newNode;
+            
+            if(not_vis == true){
+                newNode = new Node(child.val);
+            }
+            else{
+                newNode = vis.get(child.val);
+            }
+            
+            (myNode.neighbors).add(newNode);
+            
+            if(not_vis) dfs(newNode, child);
+        }
+    }
+    Node cloneGraph(Node node){
+        Node myNode = new Node(node.val);
+        
+        dfs(myNode, node);
+        return myNode;
+    }
+}
