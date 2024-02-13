@@ -1,5 +1,4 @@
 /*
-    MY YOUTUBE VIDEO ON THIS Qn : https://www.youtube.com/watch?v=qases-9gOpk
     Company Tags                : MICROSOFT
     GfG Link                    : https://www.geeksforgeeks.org/problems/search-pattern0205/1
 */
