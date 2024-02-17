@@ -6,7 +6,7 @@
 */
 
 //NOTE - For Heap Approach (Lazy Greedy) : 
-//Link to Lazy Greedy Approach - ou%20can%20Reach.java
+//Link to Lazy Greedy Approach - https://github.com/jatakchatterjee12/practice_problems/blob/main/Heap(Priority%20Queue)/Furthest%20Building%20You%20can%20Reach.java
 
 /***************************************************************** C++ *****************************************************************/
 //MEMORY LIMIT EXCEED - Not Accepted
