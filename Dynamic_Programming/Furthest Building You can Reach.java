@@ -6,7 +6,7 @@
 */
 
 //NOTE - For Heap Approach (Lazy Greedy) : 
-//Link to Lazy Greedy Approach - https://github.com/MAZHARMIK/Interview_DS_Algo/blob/master/Heap/Furthest%20Building%20You%20Can%20Reach.cpp
+//Link to Lazy Greedy Approach - ou%20can%20Reach.java
 
 /***************************************************************** C++ *****************************************************************/
 //MEMORY LIMIT EXCEED - Not Accepted
