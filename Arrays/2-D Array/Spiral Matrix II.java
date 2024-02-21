@@ -7,57 +7,73 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        if(n == 0)
-            return {};
-        int m = n;
-        vector<vector<int>> matrix(m, vector<int>(n));
-        int top   = 0;
-        int down  = m-1;
-        int left  = 0;
+
+        int dir = 0;
+        int item = 1;
+
+        vector<vector<int>> matrix(n, vector<int>(n,0));
+
+        int top = 0;
+        int down = n-1;
+
+        int left = 0;
         int right = n-1;
-        
-        int id = 0;
-        //id
-        //0   -> left  to right
-        //1   -> top   to down
-        //2   -> right to left
-        //3   -> down  to top
-        int counter = 1;
+
+        /*
+            dir = 0 : left to right 
+            dir = 1 : top to bottom
+            dir = 2 : right to left;
+            dir = 3 : bottom to top
+        */
+
+        vector<int> result;
+
         while(top <= down && left <= right) {
-            //left to right
-            if(id == 0) {
-                for(int i = left; i<=right; i++) {
-                    matrix[top][i] = counter++;
+
+            if(dir == 0) {
+                // left to right
+                // constant : top
+
+                for(int i = left; i <= right; i++) {
+                    matrix[top][i] = item++;
                 }
                 top++;
             }
-            
-            //top to down
-            if(id == 1) {
-                for(int i = top; i<=down; i++) {
-                    matrix[i][right] = counter++;
-                }
+
+            if(dir == 1) {
+                // top to bottom
+                //constant : right
+
+                for(int i = top; i <= down; i++) {
+                    matrix[i][right] = item++;
+                } 
                 right--;
             }
-            
-            //right to left
-            if(id == 2) {
-                for(int i = right; i>=left; i--) {
-                    matrix[down][i] = counter++;
+
+            if(dir == 2) {
+                // right to left;
+                //constant : down
+
+                for(int i = right ; i>= left; i--){
+                    matrix[down][i] = item++;
                 }
                 down--;
             }
-            
-            //down to top
-            if(id == 3) {
-                for(int i = down; i>=top; i--) {
-                    matrix[i][left] = counter++;
+
+            if(dir == 3) {
+                //bottom to top
+                //constant : left
+                for(int i = down; i >= top; i--) {
+                    matrix[i][left] = item++;
                 }
                 left++;
             }
-            
-            id = (id+1)%4; // id++; if(id == 4) id = 0;
+
+            dir++;
+
+            if(dir == 4) dir = 0; // id = (id+1)%4;
         }
         return matrix;
+    
     }
 };
