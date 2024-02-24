@@ -1,5 +1,6 @@
 /*
-    GFG Link   : https://www.geeksforgeeks.org/problems/maximum-sum-problem2211/1
+    Company    :  Morgan Stanley
+    GFG Link   :  https://www.geeksforgeeks.org/problems/maximum-sum-problem2211/1
 */
 
 class Solution
