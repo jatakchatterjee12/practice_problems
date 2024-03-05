@@ -2,6 +2,14 @@
     Company Tags   : Flipkart, Amazon, Microsoft, MakeMyTrip, Adobe, BankBazaar, Myntra
     GFG  Link      : https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
 */
+/*
+    Time Complexity: O(N*logN), where N = size of the given array.
+    Reason: 
+        We are not changing the merge sort algorithm except by adding
+        a variable to it. So, the time complexity is as same as the merge sort.
+
+    Space Complexity: O(N), as in the merge sort We use a temporary array to store elements in sorted order.
+*/
 
 class Solution
 {
@@ -71,6 +79,7 @@ class Solution
 }
 
 // Code Studio Link  : https://www.codingninjas.com/studio/problems/number-of-inversions_6840276
+
 import java.io.*;
 import java.util.*;
 public class Solution {
