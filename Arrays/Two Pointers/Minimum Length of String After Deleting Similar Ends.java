@@ -57,3 +57,39 @@ public class Solution {
         return j - i + 1;
     }
 }
+// Follow-up : print the String after deletion 
+// USing Deque
+class Solution {
+    public int minimumLength(String s) {
+        
+        int n = s.length();
+        int i = 0;
+        int j = n-1;
+        Deque<Character> dq = new ArrayDeque<>();
+        for(char ch : s.toCharArray()){
+            dq.add(ch);
+        }
+
+        while(i < j && s.charAt(i) == s.charAt(j)) {
+            char ch = s.charAt(i);
+            while(i < j &&  s.charAt(i) == ch){
+                i++;
+                dq.removeFirst();
+            }
+            while(j >= i && s.charAt(j) == ch){
+                j--;
+                dq.removeLast();
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+       
+        
+        while(dq.size() > 0){
+            char ch = dq.removeFirst();
+            
+            sb.append(ch);
+        }
+        System.out.println(sb.toString());
+        return j-i+1;
+    }
+}
