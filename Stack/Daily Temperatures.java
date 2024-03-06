@@ -1,4 +1,3 @@
-/**                                                SCROLL BELOW TO SEE JAVA CODE ALSO                                        **/
 
 /*
     Company Tags                : Google, Meta, Tokopedia
