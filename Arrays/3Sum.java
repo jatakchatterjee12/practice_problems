@@ -1,5 +1,4 @@
 /*
-    codestorywithMIK YOUTUBE VIDEO ON THIS Qn : https://www.youtube.com/watch?v=_cBWWebTVpI&list=PLpIkg8OmuX-K6A0sEPFxOSJh4_AjCGAFf&index=4
     Company Tags                : Amazon, Facebook, Google
     Question on GfG             : Find triplets with zero sum (https://practice.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1)
     Leetcode Qn Link            : https://leetcode.com/problems/3sum/
@@ -41,51 +40,49 @@ public:
     }
 };
 
-// ********************************************** JAVA **************************************************************
+//******************************************************* JAVA *******************************************************//
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         
         int n = nums.length;
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>>  ans = new ArrayList<>();
 
         Arrays.sort(nums);
 
-        for(int i=0; i < n-2; i++){
+        for(int i = 0; i < n; i++) {
 
-            if((i > 0 && nums[i] == nums[i-1])){
-                continue;
-            }
+            if(i > 0 && nums[i] == nums[i-1]) continue;
 
             int left = i+1;
             int right = n-1;
-            int sum = 0 - nums[i];
+            int target = 0 - nums[i];
 
-            while(left < right){
+            while(left  < right) {
 
-                if(nums[left] + nums[right] == sum){
-                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                int sum = nums[left] + nums[right];
 
-                    while( left < right && nums[left] == nums[left+1]){
-                        left++;
-                    }
-                    
-                    while( left < right && nums[right] == nums[right-1]){
-                        right--;
-                    }
+                if(sum == target) {
+
+                    List<Integer> temp = Arrays.asList(nums[i], nums[left], nums[right]);
+                    ans.add(temp);
                     left++;
                     right--;
+
+                    while(left < right && nums[left] == nums[left-1]) left++;
+                    while(left < right && nums[right] == nums[right+1]) right--;
                 }
-                else if(nums[left] + nums[right] < sum){
+                else if(sum < target){
                     left++;
                 }
-                else right--;
+                else{
+                    right--;
+                }
             }
         }
-
-        return res;
+        return ans;
     }
- 
 }
+
 
  //TECHNIQUE 2
   class Solution {
