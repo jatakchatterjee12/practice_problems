@@ -93,3 +93,60 @@ class Solution {
         return root;
     }
 }
+
+//Approach 2 : MAking a List of LNode and make a BST out of that List
+//Tc - O(n)
+//sc -O(n)
+
+/*Linked List Node
+class LNode
+{
+    int data;
+    LNode next;
+    LNode(int d) {
+        data = d; 
+        next = null;
+    }
+}
+
+//Tree Node
+class TNode
+{
+    int data;
+    TNode left, right;
+    TNode(int x)
+    {
+        data=x;
+        left=right=null;
+    }
+    
+}*/
+
+class Solution
+{
+    TNode BuildBST(List<Integer> Tree, int start, int end) {
+        
+        if(start > end){
+            return null;
+        }
+        
+        int mid = start + (end- start + 1)/2;
+        TNode root = new TNode(Tree.get(mid));
+        
+        root.left = BuildBST(Tree, start, mid-1);
+        root.right = BuildBST(Tree, mid+1, end);
+        
+        return root;
+    }
+    public TNode sortedListToBST(LNode head)
+    {
+        
+        List<Integer> Tree = new ArrayList<>();
+        while(head != null){
+            Tree.add(head.data);
+            head = head.next;
+        }
+        
+        return BuildBST(Tree, 0, Tree.size()-1);
+    }
+}
