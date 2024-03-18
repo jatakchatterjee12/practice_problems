@@ -73,3 +73,92 @@ class Solution
         
     }
 }
+
+//********************************************************* C++ ***********************************************************8
+//Iterative Approach : Using Stack
+/*
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+class Solution
+{
+    public:
+    //Function to return a list of integers denoting the node 
+    //values of both the BST in a sorted order.
+    vector<int> merge(Node *root1, Node *root2)
+    {
+       //Your code here
+       stack<Node*> st1, st2;
+       
+       vector<int> ans ;
+       
+       while(root1){
+           st1.push(root1);
+           root1  =root1->left;
+       }
+       
+       while(root2){
+           st2.push(root2);
+           root2 = root2->left;
+       }
+       
+       while(!st1.empty() && !st2.empty()) {
+           
+           if(st1.top()->data < st2.top()->data){
+               ans.push_back(st1.top()->data);
+               root1 = st1.top()->right;
+               st1.pop();
+           }
+           else{
+               ans.push_back(st2.top()->data);
+               root2 = st2.top()->right;
+               st2.pop();
+           }
+           
+           while(root1){
+               st1.push(root1);
+               root1  =root1->left;
+            }
+       
+           while(root2){
+               st2.push(root2);
+               root2 = root2->left;
+           }
+           
+           
+       }
+       
+       while(!st1.empty()) {
+           ans.push_back(st1.top()->data);
+           root1 = st1.top()->right;
+           st1.pop();
+           
+           while(root1){
+               st1.push(root1);
+               root1 = root1->left;
+           }
+       }
+       
+       while(!st2.empty()) {
+           ans.push_back(st2.top()->data);
+           root2 = st2.top()->right;
+           st2.pop();
+           
+           while(root2){
+               st2.push(root2);
+               root2 = root2->left;
+           }
+       }
+       
+       return ans;
+       
+    }
+};
