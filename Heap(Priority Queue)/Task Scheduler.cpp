@@ -2,7 +2,7 @@
     Company Tags  : Facebook
     Leetcode Link : https://leetcode.com/problems/task-scheduler/
     
-    Greedy approach : 
+    Greedy approach : https://github.com/jatakchatterjee12/practice_problems/blob/main/Greedy/Task%20Scheduler.cpp
 */
 
 //********************************************************************* C++ ****************************************************8//
