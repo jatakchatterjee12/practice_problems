@@ -1,3 +1,5 @@
+//***************************************************** C++ *************************************************************************//
+
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int p) {
@@ -45,3 +47,35 @@ public:
         return n;
     }
 };
+
+//************************************************** JAVA ********************************************************************************************
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        
+        int size = tasks.length;
+
+        int[] mp = new int[26];
+        Arrays.fill(mp, 0);
+
+        for(char ch : tasks) {
+            mp[ch - 'A']++;
+        }
+
+       Arrays.sort(mp);
+
+        int maxFreq = mp[25];
+        int gaddha  = maxFreq - 1;
+        int idleSlots = (gaddha * n);
+
+        for(int i = 24; i >= 0; i--) {
+
+            idleSlots -= Math.min(gaddha, mp[i]);
+        }
+
+        if(idleSlots > 0){
+            return idleSlots + size;
+        }
+
+        return size;
+    }
+}
