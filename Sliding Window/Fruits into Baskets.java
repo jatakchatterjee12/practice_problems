@@ -46,6 +46,10 @@ public:
 
             mp[fruits[j]]++;
 
+            
+             // replace the while loop with if statement makes it O(2n) --> O(n)
+            //  just like maxconsecuitve ones iii
+
             while(mp.size() > 2) {
                 mp[fruits[i]]--;
                 if(mp[fruits[i]] == 0){
@@ -79,7 +83,10 @@ class Solution {
 
             mp.put(fruits[j], mp.getOrDefault(fruits[j],0) +1);
 
-            while(mp.size() > 2){
+             // replace the while loop with if statement makes it O(2n) --> O(n)
+            //  just like maxconsecuitve ones iii
+
+            while(mp.size() > 2){               
                 mp.put(fruits[i], mp.getOrDefault(fruits[i],0) - 1);
 
                 if(mp.get(fruits[i]) == 0){
