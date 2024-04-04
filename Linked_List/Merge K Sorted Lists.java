@@ -61,6 +61,66 @@ public:
     }
 };
 
+
+
+//Approach 2: Using Min Heap
+//TC - O(n* k* log(k))
+
+/*
+struct Node
+{
+	int data;
+	Node* next;
+	
+	Node(int x){
+	    data = x;
+	    next = NULL;
+	}
+	
+};
+*/ 
+
+class Solution{
+  public:
+  
+    class Compare{
+        public:
+            bool operator()(Node* a, Node* b) {
+                return a->data > b->data;
+            }
+    };
+    
+    
+    //Function to merge K sorted linked list.
+    Node * mergeKLists(Node *arr[], int K)
+    {
+        priority_queue<Node*, vector<Node*> ,  Compare > pq(arr, arr + K);
+        
+        Node* dummy = new Node(0);
+        Node* tail = dummy;
+        
+        Node* temp;
+        
+        while(!pq.empty()) {
+            
+            temp = pq.top();
+            pq.pop();
+            
+            tail->next = temp;
+            tail = tail->next;
+            
+            if(temp->next){
+                pq.push(temp->next);
+            }
+        }
+        
+        return dummy->next;
+        
+        
+    }
+};
+
+
 //******************************************************** JAVA *******************************************************************//
 //Approach-1 (Using merge sort) - Time : O(log(k) * k * n)
 /*
@@ -106,5 +166,41 @@ class Solution {
         if(k == 0) return null;
 
         return partitionAndMerge(0, k-1, lists);
+    }
+}
+
+
+////Approach 2: Using Min Heap
+//TC - O(n* k* log(k))
+class Solution
+{
+    //Function to merge K sorted linked list.
+    Node mergeKList(Node[]arr,int K)
+    {
+       
+       PriorityQueue<Node> pq = new PriorityQueue<>((a,b)-> a.data - b.data);
+       
+       for(Node i : arr){
+           pq.add(i);
+       }
+       
+       Node dummy = new Node(0);
+       Node tail = dummy;
+       
+       Node temp;
+       
+       while(!pq.isEmpty()) {
+           
+           temp = pq.poll();
+           
+           tail.next = temp;
+           tail = tail.next;
+           
+           if(temp.next != null){
+               pq.add(temp.next);
+           }
+       }
+       
+       return dummy.next;
     }
 }
