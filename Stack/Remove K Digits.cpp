@@ -108,12 +108,14 @@ public class Solution {
                 result.append(num.charAt(i)); // to avoid the case when we have preceding zeros
             }
         }
-        
+
+        // // "12345" all increasing
         while(result.length() > 0 && k > 0) {
             result.deleteCharAt(result.length() - 1);
             k--;
         }
 
+         //if result becomes empty
         if(result.length() == 0) {
             return "0";
         }
@@ -121,3 +123,6 @@ public class Solution {
         return result.toString();
     }
 }
+
+
+
