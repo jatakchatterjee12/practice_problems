@@ -44,7 +44,7 @@ public:
 };
 
 
-//Using Stack
+/////////////////////////          Using Stack
 class Solution {
 public:
     string removeKdigits(string num, int k) {
@@ -121,6 +121,48 @@ public class Solution {
         }
         
         return result.toString();
+    }
+}
+
+
+//////////////////////////////   Using Stack 
+class Solution {
+    public String removeKdigits(String num, int k) {
+        
+        int n = num.length();
+        if(k == n) return "0";
+
+        Stack<Character> st = new Stack<>();
+
+        for(int i = 0; i < n; i++) {
+
+            while(!st.isEmpty() && st.peek() > num.charAt(i) && k > 0) {
+                st.pop();
+                k--;
+            } 
+
+            if(!st.isEmpty() || num.charAt(i) != '0'){
+                st.push(num.charAt(i));
+            }
+        }
+
+        // "12345" all increasing
+        while(!st.isEmpty() && k > 0) {
+            st.pop();
+            k--;
+        }
+
+        //if sb becomes empty
+        if(st.isEmpty()){
+            return "0";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty()){
+            sb.append(st.pop());
+        }
+
+        return sb.reverse().toString();
     }
 }
 
