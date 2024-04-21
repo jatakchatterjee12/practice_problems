@@ -349,3 +349,45 @@ class Solution {
 //Approach-3 (Brute Force Greedy)
 //T.C : O(m*n)
 //S.C : O(1)
+class Solution {
+    public int[][] findFarmland(int[][] land) {
+        
+        int m = land.length;
+        int n = land[0].length;
+        List<int[]> res = new ArrayList<>();
+
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+
+                if(land[i][j] == 0) continue;
+
+                int r1 = i;
+                int c1 = j;
+
+                int c2 = j;
+                while(c2 < n && land[i][c2] == 1){
+                    c2++;
+                }
+
+                int r2 = i;
+                while(r2 < m && land[r2][j] == 1){
+                    r2++;
+                }
+
+                r2 = r2 == 0? r2 : r2-1;
+                c2 = c2 == 0? c2 : c2-1;
+
+                res.add(new int[] {r1, c1, r2, c2});
+
+
+                for(int k = i; k <= r2 ;k++) {
+                    for(int l = j; l <= c2; l++) {
+
+                        land[k][l] = 0; // mark all cells visited;
+                    }
+                }
+            }
+        }
+        return res.toArray(new int[res.size()][4]);
+    }
+}
