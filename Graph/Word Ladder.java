@@ -62,7 +62,64 @@ public:
 
 
 //*************************************************************************** JAVA ******************************************************************88//
+//Approach 1:
+class Solution {
+    void fillNeighbors(Queue<String> que, StringBuilder curr, Set<String> st) {
 
+        int n = curr.length(); // n = [1,10]
+        for(int i=0; i < n; i++){
+
+            char temp = curr.charAt(i);
+
+            for(char ch = 'a'; ch <= 'z'; ch++) {
+
+                curr.setCharAt(i, ch);
+                String currStr = curr.toString();
+
+                if(st.contains(currStr)){
+                    que.add(currStr);
+                    st.remove(currStr);
+                }
+
+            }
+            curr.setCharAt(i, temp);
+        }
+
+    }
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        
+        Set<String> st = new HashSet<>();
+        for(String word : wordList){
+            st.add(word);
+        }
+
+        Queue<String> que = new LinkedList<>();
+
+        que.add(beginWord);
+         
+        int level = 1; // beginWord is at level 1
+
+        while(!que.isEmpty()) {
+
+            int n = que.size();
+            while(n-- > 0) {
+                String curr = que.poll();
+
+                if(curr.equals(endWord)){
+                    return level;
+                }
+
+                StringBuilder currSb = new StringBuilder(curr);
+                fillNeighbors(que, currSb, st);
+            }
+            level++;
+        } 
+        return 0;
+    }
+}
+
+
+//Approach 2:
 
 class Solution {
     class Pair{
