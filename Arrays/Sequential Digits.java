@@ -1,4 +1,4 @@
-/*                                                    Scroll below for JAVA code also                             */
+
 /*
     Company Tags                : Amazon
     Leetcode Link               : https://leetcode.com/problems/sequential-digits/
