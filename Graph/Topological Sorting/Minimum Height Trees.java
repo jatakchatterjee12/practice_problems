@@ -6,6 +6,60 @@
 //NOTE : You can do a brute force to do DFS from each node treating them as root and keep finding the Height in every case. That will give TLE.
 
 /**************************************************** C++ ********************************************/
+
+//Brute Force
+class Solution {
+public:
+    
+    int solve(map<int, vector<int>> &adj, int node, int par ) {
+        int h = 0;
+        for(int &v : adj[node]) {
+            if(v != par){
+                h = max(h, 1 + solve(adj, v, node));
+            }
+        }
+        //cout<<h << node<<endl;
+        return h;
+        
+    }
+    vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
+
+        if(n == 1)return {0};
+        map<int, vector<int>> adj;
+        for(auto edge : edges){
+            int u = edge[0];
+            int v = edge[1];
+
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+
+        vector<int> result;
+        int minHeight = n;
+        for(int i = 0; i < n; i++) { //try out all roots and get the heights for all individual root
+            
+            int height = solve(adj, i, -1);
+            cout<<"hehe";
+            cout<<height<<" ";
+            if(height < minHeight){
+                result.clear();
+                result.push_back(i);
+                minHeight = height;
+            }
+            else if(height == minHeight){
+                result.push_back(i);
+            }
+        } 
+        
+        return result;
+
+    }
+};
+
+
+
+
+
 //Using Topological Sorting
 //T.C : O(V+E)
 //S.C : O(V+E)
