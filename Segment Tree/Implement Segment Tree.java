@@ -7,7 +7,7 @@ public class SegmentTree2 {
 	 int[] a ;
 	 int[] st ;
 	
-	public  void buildTree(int ind, int low, int high) {
+	public  void buildTree(int ind, int low, int high) { // O(n)
 		if(low >= high) {
 			st[ind] = a[low];
 			return;
@@ -20,7 +20,7 @@ public class SegmentTree2 {
 		st[ind] = st[2*ind+1] + st[2*ind+2];
 	}
 	
-	private  int querySum(int ind, int low, int high, int l, int r) {
+	private  int querySum(int ind, int low, int high, int l, int r) { //O(logn)
 		
 		if(low >= l && high <= r) {
 			return st[ind];
@@ -39,7 +39,7 @@ public class SegmentTree2 {
 	}
 
 	
-	void update(int ind, int low, int high, int updateIdx, int diff) {
+	void update(int ind, int low, int high, int updateIdx, int diff) { // O(logn)
 		
 		if(updateIdx < low || updateIdx > high) {
 			return;
@@ -84,7 +84,7 @@ public class SegmentTree2 {
 		System.out.println();
 		
 		System.out.println("------------------");
-		System.out.println(obj.querySum(0, 0, n-1,l,r));
+		System.out.println(obj.querySum(0, 0, n-1,l,r)); //output [0,2] --> 15
 		
 		
 		//update the array
@@ -105,7 +105,7 @@ public class SegmentTree2 {
 		System.out.println();
 		System.out.println("------------------");
 
-		System.out.println(obj.querySum(0, 0, n-1,l,r));
+		System.out.println(obj.querySum(0, 0, n-1,l,r)); //output [0,2] --> 20 
 		
 
 	}
