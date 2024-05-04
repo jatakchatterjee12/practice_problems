@@ -4,7 +4,7 @@
 */
 
 /*************************************************************** C++ ***************************************************************/
-//Approach-1 (Using Recrusion + Memoization) -> Why DP ? (See my video above)
+//Approach-1 (Using Recrusion + Memoization) 
 //T.C : O(n*n)
 //S.C : O(n*n)
 class Solution {
@@ -223,7 +223,7 @@ class Solution {
         t[n][0] = true;
 
         for (int i = n - 1; i >= 0; i--) {
-            for (int open = 0; open < n; open++) {
+            for (int open = 0; open <= n; open++) {
                 boolean isValid = false;
 
                 if (s.charAt(i) == '*') {
