@@ -1,5 +1,4 @@
 /*
-    codestorywithMIK YOUTUBE VIDEO ON THIS Qn : https://www.youtube.com/watch?v=pvg0yrD-E5w
     Company Tags                : Google, Microsoft, Amazon, Ebay, Meta
     Leetcode Link               : https://leetcode.com/problems/jump-game/
 */
@@ -76,3 +75,52 @@ public:
 
     }
 };
+
+
+//************************************************ JAVA **************************************************//
+//Approach 1 : Greedy (OPTIMIZED)
+class Solution {
+    public boolean canJump(int[] nums) {
+        
+        int n = nums.length;
+        int maxReachable = 0;
+
+        for(int i = 0; i < n; i++) {
+
+            if(i > maxReachable){
+                return false;
+            }
+
+            maxReachable = Math.max(maxReachable, i + nums[i]);
+        }
+        return true;
+    }
+}
+
+
+
+//Approach 2 : Recursion + Memo
+class Solution {
+    boolean solve(int[] nums, int i, int n, Boolean[] dp) {
+
+        if(i >= n-1) return true;
+
+        if(dp[i] != null) return dp[i];
+
+        for(int jump = 1; jump <= nums[i]; jump++) {
+
+            if(solve(nums, i + jump, n, dp) == true){
+                return dp[i] = true;
+            }
+        }
+
+        return dp[i] = false;
+    }
+    public boolean canJump(int[] nums) {
+        
+        int n = nums.length;
+        Boolean[] dp = new Boolean[n+1]; // default value null
+        
+        return solve(nums, 0, n, dp);
+    }
+}
