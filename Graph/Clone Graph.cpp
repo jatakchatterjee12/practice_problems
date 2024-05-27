@@ -3,6 +3,8 @@
     Leetcode Qn Link            : https://leetcode.com/problems/clone-graph/
 */
 
+//********************************************************* C++ ********************************************************//
+
 //Approach-1 (DFS) Using vector as map
 class Solution {
 public:
@@ -228,3 +230,60 @@ public:
         return clone_node;
     }
 };
+
+
+//************************************************** JAVA ******************************************************
+//Approach 1: USing DFS Using HashMap
+
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> neighbors;
+    public Node() {
+        val = 0;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val) {
+        val = _val;
+        neighbors = new ArrayList<Node>();
+    }
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}
+*/
+
+class Solution {
+    private void DFS(Node node, Node clone_node, Map<Node, Node> mp) {
+
+        for(Node child : node.neighbors) {
+
+            if(!mp.containsKey(child)) {
+                Node new_child = new Node(child.val);
+                mp.put(child, new_child);
+                clone_node.neighbors.add(new_child);
+                DFS(child, new_child, mp);
+            }
+            else{
+                clone_node.neighbors.add(mp.get(child));
+            }
+        }
+
+    } 
+    public Node cloneGraph(Node node) {
+        
+        if(node == null) return null;
+
+        Map<Node, Node> mp = new HashMap<>(); // original node -> cloned node
+
+        Node clone_node = new Node(node.val);
+        mp.put(node, clone_node);
+
+        DFS(node, clone_node, mp);
+
+        return clone_node;
+    }
+}
