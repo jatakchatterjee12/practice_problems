@@ -88,6 +88,7 @@ public:
 };
 
 /******************************************************************* JAVA *****************************************************/
+//Approach 1 : sort in ascending order of start time and greedily pick up the long endtime overlapping intervals to remove
   class Solution {
     public int eraseOverlapIntervals(int[][] intervals) {
         
@@ -126,5 +127,35 @@ public:
         }
 
        return count;
+    }
+}
+
+
+
+// Approach ---> Same as N meeting in one room  Here we sort the intervals in order to  endTime 
+//               ascending order of end time
+//Same code for N meetings in one room
+
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        
+        int n = intervals.length;
+        Arrays.sort(intervals, (a,b)-> a[1] - b[1]);
+
+        int count = 1;
+        int lastEndTime = intervals[0][1];
+
+        for(int i = 1; i < n ; i++) {
+
+            int curr_start = intervals[i][0];
+            int curr_end =  intervals[i][1];
+
+            if(curr_start >= lastEndTime) {
+                count++;
+                lastEndTime = curr_end;
+            }
+        }
+
+        return n - count;
     }
 }
