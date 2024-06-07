@@ -3,8 +3,9 @@
     Leetcode Link               : https://leetcode.com/problems/hand-of-straights
 */
 
+///////////////////////////////////////////////////// C++ ///////////////////////////////////////////////////////
 
-//Approach (Simply using map)
+//Approach (Simply using map) 
 //T.C  : O(nlogn) + O(n*groupSize)
 //S.C  : O(n)
 class Solution {
@@ -44,7 +45,9 @@ public:
 };
 
 
-//Approach (Simply using map)
+////////////////////////////////////////////////// JAVA /////////////////////////////////////////////////////////////
+
+//Approach (Simply using map) TreeMap
 //T.C  : O(nlogn) + O(n*groupSize)
 //S.C  : O(n)
 class Solution {
@@ -75,6 +78,41 @@ class Solution {
             }
         }
 
+        return true;
+    }
+}
+
+
+// using LinkedHashMap
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+
+        int n = hand.length;
+        if(n % groupSize != 0){
+            return false;
+        }
+
+        Arrays.sort(hand);
+        Map<Integer, Integer> mp = new LinkedHashMap<>();
+        for(int it : hand){
+            mp.put(it, mp.getOrDefault(it, 0) + 1);
+        }
+
+        while(!mp.isEmpty()) {
+            Map.Entry<Integer, Integer> entry = mp.entrySet().iterator().next();
+            int curr = entry.getKey();
+
+            for(int i = 0; i < groupSize; i++) {
+                if(!mp.containsKey(curr+i)){
+                    return false;
+                }
+
+                mp.put(curr+i, mp.get(curr+i)-1);
+                if(mp.get(curr+i) == 0){
+                    mp.remove(curr+i);
+                }
+            }
+        }
         return true;
     }
 }
