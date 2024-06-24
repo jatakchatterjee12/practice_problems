@@ -22,13 +22,17 @@ public class SegmentTree2 {
 	
 	private  int querySum(int ind, int low, int high, int l, int r) { //O(logn)
 		
-		if(low >= l && high <= r) {
+		// [low,high] entirely inside the range [l,r]
+		if(low >= l && high <= r) { 
 			return st[ind];
 		}
-		
+
+		// out of bound situation 
 		else if(high < l || low > r) {
 			return 0;
 		}
+
+		// overlapping --> goes left, goes right and return (left + right)	
 		else {
 			int mid = low + (high - low)/2;
 			int left = querySum(2*ind+1, low, mid, l, r);
@@ -65,7 +69,7 @@ public class SegmentTree2 {
 		
 		int n = 3;
 		obj.a = new int[] {2, 5, 8};
-		obj.st = new int[4*n];
+		obj.st = new int[4*n]; // safest to take the array size 4*n;
 		
 		obj.buildTree(0, 0, n-1);
 		
