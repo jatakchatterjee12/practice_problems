@@ -1,5 +1,4 @@
 /*
-    MY YOUTUBE VIDEO ON THIS Qn : https://www.youtube.com/watch?v=AsAdKHkITBQ
     Company Tags                : Google, Facebook, Apple, Amazon, Netflix, Flipkart
 */
 
