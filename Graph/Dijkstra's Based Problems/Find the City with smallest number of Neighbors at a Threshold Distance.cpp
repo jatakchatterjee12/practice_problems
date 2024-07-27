@@ -1,10 +1,8 @@
-
+/*
     Company Tags                : Amazon, Microsoft
     Leetcode Link               : https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance
 */
 
-//Using Bellman Ford - https://github.com/MAZHARMIK/Interview_DS_Algo/blob/master/Graph/Bellman-Ford%20Based%20Problems/Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance.cpp
-//Using Floyd Warshall - https://github.com/MAZHARMIK/Interview_DS_Algo/blob/master/Graph/Floyd%20Warshall/Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance.cpp
 
 /************************************************************ C++ ************************************************************/
 //Approach (Using Dijkstra's)
@@ -172,5 +170,83 @@ class Solution {
         }
 
         return getCityWithFewestReachable(n, shortestPathMatrix, distanceThreshold);
+    }
+}
+
+
+////////////////////////////////// More Simpler Way to code /////////////////////////////////////////////////////////
+class Solution {
+    private class Pair{
+        int node;
+        int dist;
+        Pair(int n, int d){
+            node  = n;
+            dist = d;
+        }
+    }
+    public int findTheCity(int n, int[][] edges, int distanceThreshold) {
+        
+        List<Pair> adj[] = new List[n];
+        for(int i = 0; i < n; i++){
+            adj[i] = new ArrayList<>();
+        }
+
+        for(int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int wt = edge[2];
+
+            adj[u].add(new Pair(v, wt));
+            adj[v].add(new Pair(u, wt));
+        }
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.dist - b.dist); // min heap
+
+
+        int result = 0;
+        int cntOfCity = n;
+
+        for(int city = 0; city < n; city++) {
+
+            int[] distance = new int[n];
+            Arrays.fill(distance, (int)1e8);
+
+            pq.add(new Pair(city, 0));
+            distance[city] = 0;
+
+            while(!pq.isEmpty()) {
+                Pair p = pq.poll();
+                int node = p.node;
+                int dist = p.dist;
+
+                for(Pair it : adj[node]) {
+                    int adjNode = it.node;
+                    int adjWt = it.dist;
+
+                    if(dist + adjWt < distance[adjNode]){
+                        distance[adjNode] = dist + adjWt;
+                        pq.add( new Pair(adjNode, distance[adjNode]));
+
+                    }
+                }
+            }
+
+            int cnt = 0;
+            for(int j = 0; j < n; j++) {
+                if(distance[j] <= distanceThreshold) {
+                    cnt++;
+                }
+            }
+
+            if(cnt <= cntOfCity){
+                cntOfCity = cnt;
+                result = city;
+            }
+
+
+        }
+        return result;
+
+
     }
 }
