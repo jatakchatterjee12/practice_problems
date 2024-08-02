@@ -39,18 +39,18 @@ public class Solution
 
         if(head == null || head.next == null) return head;
 
-        Node prev = null;
+        Node prevNode = null;
         Node curr = head;
 
         while(curr != null) {
-            prev = curr.prev;
+            prevNode = curr.prev;
 
             curr.prev = curr.next;
-            curr.next = prev;
+            curr.next = prevNode;
             
             curr = curr.prev;
         }
 
-        return prev.prev;
+        return prevNode.prev;
     }
 }
