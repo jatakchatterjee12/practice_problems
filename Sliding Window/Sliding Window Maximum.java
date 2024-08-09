@@ -6,6 +6,18 @@
     
     NOTE : Please also see hard version of this question : Leetcode-1425
     
+*/ // Approach:
+
+/*
+
+        // step-1 When new elemwnt comes in, make space for it( window size cannot be greater than k)
+
+        // step-2: now, when nums[i] comes ,there is no need to keep small element in the window, pop it from back
+        
+        // step-3: now push i  in deque -> for nums[i]
+
+        // step-4: if( i >= k-1), then deq.front() is our answer for that window
+
 */
 
 /*
@@ -88,33 +100,33 @@ public:
 
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        ArrayDeque<Integer> q = new ArrayDeque<>(); 
-        int i=0, j=0, ptr=0; 
-        int n = nums.length; 
-        int[] res = new int[n-k+1]; 
+        ArrayDeque<Integer> deq = new ArrayDeque<>();
 
-        while(j<n){
-            while(!q.isEmpty() && q.peekLast()<nums[j]){
-                q.pollLast(); 
+        int n = nums.length;
+
+        int[] result = new int[n-k+1];
+        int ptr = 0;
+
+        for(int i = 0; i < n; i++) {
+
+          //Step 1:
+            while(!deq.isEmpty() && deq.peekFirst() <= i-k){
+                deq.pollFirst();
             }
-        
-            q.add(nums[j]);
 
-            if(j-i+1<k){
-                j++; 
-            }else if(j-i+1==k){
+          //Step 2: 
+            while(!deq.isEmpty() && nums[i] > nums[deq.peekLast()]){  
+                deq.pollLast();   
+            }
 
-                res[ptr++] = q.peek();
-                
-                if(nums[i]==q.peek()){
-                    q.pollFirst(); 
-                }
-                i++; 
-                j++;
+          //Step 3:
+            deq.addLast(i);
+
+          //Step 4:
+            if( i >= k-1){
+                result[ptr++] = nums[deq.peek()];
             }
         }
-
-        return res; 
-
+        return result;
     }
 }
