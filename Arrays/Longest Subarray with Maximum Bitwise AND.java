@@ -50,10 +50,10 @@ class Solution {
             if(num > maxVal) {
                 maxVal = num;
                 result = 0;
-                streak = 0;
+                streak = 1;
             }
 
-            if(maxVal == num) {
+            else if(maxVal == num) {
                 streak++;
             } else {
                 streak = 0;
