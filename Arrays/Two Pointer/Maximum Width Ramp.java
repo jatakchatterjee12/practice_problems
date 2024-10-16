@@ -81,7 +81,7 @@ public:
 
 
 /********************************************************************** JAVA **********************************************************************/
-//Approach-1 (Using brute force)
+//Approach-1 (Using brute force) (Pass 95/101 testcases)
 //T.C : O(n^2)
 //S.C : O(1)
 class Solution {
@@ -100,7 +100,7 @@ class Solution {
 }
 
 
-//Approach-2 (early termination) - Passes 97/101 test cases
+//Approach-2 (early termination) - Passes 100/101 test cases
 //T.C : O(n^2) in worst case
 //S.C : O(1)
 class Solution {
@@ -150,6 +150,44 @@ class Solution {
             j++;
         }
 
+        return ramp;
+    }
+}
+
+// Approach 4 : Using Monotonic Decreasing Stack
+//TC : O(n)
+//SC : O(n)
+
+/*
+    [6, 0, 8, 2, 1, 5]
+
+    stack contains -- [6, 0]    //no need to push 8 cz for any possible ramp for 8 that could not be the max width ramp as 0 & 6 are already there in the left of 8
+                                // so any fit number(ex: 8,9,10,....) for 8 can make ramp with 0 and 6 too and make the max width ramp
+
+    then we traverse from back and check the stack top index if it can make ramp and continuosly updating MaxRamp;                            
+*/
+
+class Solution {
+    public int maxWidthRamp(int[] nums) {
+        
+        int n = nums.length;
+        Stack<Integer> st = new Stack<>(); // store the indices // decreasing monotonic stack
+
+        for(int i = 0; i < n ; i++){
+            if(st.isEmpty() || nums[i] < nums[st.peek()]){
+                st.push(i);
+            }
+        }
+
+        int ramp = 0;
+
+        for(int i = n-1; i >= 0; i--){
+            while(!st.isEmpty() && nums[i] >= nums[st.peek()]){
+                ramp = Math.max(ramp, i - st.peek());
+                st.pop();
+            }
+        }
+        
         return ramp;
     }
 }
