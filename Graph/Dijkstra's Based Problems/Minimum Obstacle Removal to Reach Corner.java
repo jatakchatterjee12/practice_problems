@@ -105,3 +105,58 @@ class Solution {
         return result[m - 1][n - 1];
     }
 }
+
+//Approach 2 : Using 0-1 BFS
+//TC - O(E+V)
+class Solution {
+
+    int[][] dirs = {{-1,0}, {0,1}, {1,0}, {0,-1}};
+
+    public int minimumObstacles(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        int[][] result = new int[m][n];
+        for(int[] row : result){
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+
+        result[0][0] = 0;
+
+        //PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        Deque<int[]> deq = new ArrayDeque<>();
+
+        deq.add(new int[]{0, 0, 0}); // wt, i, j
+
+        while(!deq.isEmpty()){
+
+            int[] curr = deq.pollFirst();
+
+            int d = curr[0];
+            int i = curr[1];
+            int j = curr[2];
+
+            for(int[] dir : dirs){
+                int new_i = i + dir[0];
+                int new_j = j + dir[1];
+
+                if(new_i < 0 || new_i >= m || new_j < 0 || new_j >= n || result[new_i][new_j] != Integer.MAX_VALUE){
+                    continue;
+                }
+
+                if(grid[new_i][new_j] == 1){
+                    //obstacle --> push it to last
+                    deq.addLast(new int[] {d+1, new_i, new_j});
+                    result[new_i][new_j] = d+1;
+                }
+                else{
+                    // bo obsatcle --> push it to front
+                    deq.addFirst(new int[] {d, new_i, new_j});
+                    result[new_i][new_j] = d;
+                }
+            }
+        }
+
+        return result[m-1][n-1];
+    }
+}
