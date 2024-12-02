@@ -5,6 +5,7 @@
 
 //Note : Most Optimized Solution Used in 2nd part of this problem.
 
+//Approach : Graph | BFS | Greedy
 //TC - O(n^2 + m^2)
 //SC - O(n+m)
 
