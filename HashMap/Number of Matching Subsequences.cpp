@@ -71,5 +71,5 @@ public:
 //Approach-3 (Using Binary Search)
 /*
   You will find it in "Arrays/Binary Search" Section : 
-  Link : https://github.com/MAZHARMIK/Interview_DS_Algo/blob/master/Arrays/Binary%20Search/Number%20of%20Matching%20Subsequences.cpp
+  Link : https://github.com/jatakchatterjee12/practice_problems/blob/main/Arrays/Binary%20Search/Number%20of%20Matching%20Sebsequence.java
 */
