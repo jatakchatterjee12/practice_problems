@@ -145,3 +145,89 @@ public:
 
 
 /********************************************************** JAVA ****************************************************/
+//Approach-1 (Recursion + Memoized)  [Time : O(max_day)] [Space : O(n)] //n = size of days vector
+class Solution {
+
+    int[] dp;
+
+    private int solve(int[] days, int[] costs, int n, int i) {
+
+        if(i >= n){
+            return 0;
+        }
+
+        if(dp[i] != -1){
+            return dp[i];
+        }
+
+        int cost_1 = costs[0] + solve(days, costs, n, i+1);
+
+        int j = i;
+        int maxDays = days[i] + 7;
+        while(j < n && days[j] < maxDays){
+            j++;
+        }
+
+        int cost_7 = costs[1] + solve(days, costs, n, j);
+
+        j = i;
+        maxDays = days[i] + 30;
+        while(j < n && days[j] < maxDays){
+            j++;
+        } 
+
+        int cost_30 = costs[2] + solve(days, costs, n, j);
+
+        return dp[i] = Math.min(cost_1, Math.min(cost_7, cost_30));
+        
+    }
+    public int mincostTickets(int[] days, int[] costs) {
+        int n = days.length;
+
+        dp = new int[n+1];
+        Arrays.fill(dp, -1);
+        
+        return solve(days, costs, n, 0);
+    }
+}
+
+
+
+// Bottom-up
+// (Moving from i = n-1 to 0
+//Simply replacing recursive calls with t
+class Solution{
+   public int mincostTickets(int[] days, int[] costs) {
+        int n = days.length;
+
+        dp = new int[n+1];
+        //Arrays.fill(dp, -1);
+
+        dp[n] = 0;
+
+        for(int i = n-1; i >= 0; i--){
+            int cost_1 = costs[0] + solve(days, costs, n, i+1);
+
+            int j = i;
+            int maxDays = days[i] + 7;
+            while(j < n && days[j] < maxDays){
+                j++;
+            }
+
+            int cost_7 = costs[1] + dp[j];
+
+            j = i;
+            maxDays = days[i] + 30;
+            while(j < n && days[j] < maxDays){
+                j++;
+            } 
+
+            int cost_30 = costs[2] + dp[j];
+
+            dp[i] = Math.min(cost_1, Math.min(cost_7, cost_30));
+
+        }
+        
+        return dp[0];
+    }
+}
