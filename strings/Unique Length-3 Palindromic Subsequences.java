@@ -1,5 +1,5 @@
 /*       
-      Company Tags                : META, AMAZON, GOOGLE
+      Company Tags                : META, AMAZON, GOOGLE, ADOBE, UBER, APPLE
       Leetcode Link               : https://leetcode.com/problems/unique-length-3-palindromic-subsequences
 */
 
