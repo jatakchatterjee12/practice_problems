@@ -169,3 +169,55 @@ class Solution {
         return result[0];
     }
 }
+
+
+// Approach 3 : Most Optimal  (Some Math trick)
+// TC - O(n)
+// SC - O(n) only result string
+class Solution {
+    public String getHappyString(int n, int k) {
+        
+        StringBuilder sb = new StringBuilder();
+        int totalStrings = 3 * (1 << (n-1)); // 3*2^n-1; // first idex has 3 options, others have only 2
+        if(k > totalStrings) return "";
+        int group = (1 << (n-1)); // 2^n-1 // aisa group 3 hoga..  (1) 'a' se start.  (2)'b' se start. (3) 'c' se start 
+
+        int startA = 1; // 'a' se start hoga first index == 1 ---- [1,4] n = 3
+        int startB = startA + group; // 'b' se start hoga first index == 5 (n = 3) --- [5,8]
+        int startC = startB + group; // 'c' se start hoga first index == 9 --- [9-12] 
+
+        // determine the first char and reset the k
+        if(k < startB){
+            sb.append('a');
+            k -= startA;
+        }
+        else if(k < startC){
+            sb.append('b');
+            k -= startB;
+        }
+        else{
+            sb.append('c');
+            k -= startC;
+        }
+
+        for(int i = 1; i < n; i++){ // i = 0 is set, now setting other indeices
+
+            char prev = sb.charAt(sb.length()-1);
+
+            // after first index, every index has 2 choices, so we find out the mid and checking the next characater
+            int mid = 1 << (n-i-1); // 2^n-i / 2
+
+            if(k < mid){
+                char nextChar = (prev == 'a' ? 'b' : (prev == 'b' ? 'a' : 'a'));
+                sb.append(nextChar);
+            }
+            else{ // k >= mid
+                char nextChar = (prev == 'a' ? 'c' : (prev == 'b' ? 'c' : 'b'));
+                sb.append(nextChar);
+
+                k -= mid;
+            }   
+        }
+        return sb.toString();
+    }
+}
