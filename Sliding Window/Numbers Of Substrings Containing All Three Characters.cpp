@@ -69,6 +69,17 @@ public:
 };
 
 
+//Approach - with every character, there is a substring taht ends. we are summing up all the substrings that ends at a certain index
+// "bbacba" --> minimum window size with all three charcter ends at 'b'(index=4) is 3 and it starts at index 2 (minIndex{a,b,c})
+// now adding up all the other substrings with that which ends at b(index=4) == "bacb" & "bbacb" .. so total 3 substring "acb",
+//"bacb", "bbacb" 
+
+// how to find the index where the min window with all three characters starts ? 
+
+// min of a index, b index and c index stored in lastSeen[] array
+
+
+
 // Without even using the condition the code will run 
 // Reason : as we initialize the lastSeen[3] with all (-1), the min of those three will come as (-1) so 
 // (cnt ==> 1 + (-1) ==> cnt = 0 
@@ -98,6 +109,15 @@ public:
 
 
 //**************************************************** JAVA *************************************************************//
+//Approach - with every character, there is a substring taht ends. we are summing up all the substrings that ends at a certain index
+// "bbacba" --> minimum window size with all three charcter ends at 'b'(index=4) is 3 and it starts at index 2 (minIndex{a,b,c})
+// now adding up all the other substrings with that which ends at b(index=4) == "bacb" & "bbacb" .. so total 3 substring "acb",
+//"bacb", "bbacb" 
+
+// how to find the index where the min window with all three characters starts ? 
+
+// min of a index, b index and c index stored in lastSeen[] array
+
 //Most Optimal Without the condition statement
 //Reason : Mentioned above 
 class Solution {
