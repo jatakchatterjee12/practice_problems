@@ -285,3 +285,142 @@ class Solution {
         return (int) score;
     }
 }
+
+
+//////////////////////////////////////////
+
+
+class Solution {
+    private final int MOD = (int)1e9 + 7;
+
+    private long findPower(long a, long x){
+        if(x==0)return 1;
+        long half = findPower(a, x/2);
+        long result = (half*half)%MOD;
+        if(x%2==1){
+            result = (result * a) % MOD;
+        }
+
+        return result;
+    }
+    private List<Integer> getPrimes(int limit){
+        boolean[] isPrime = new boolean[limit+1];
+        Arrays.fill(isPrime, true);
+
+        for(int i = 2; i*i <= limit; i++){
+            if(isPrime[i]){
+                for(int j = 2; i*j <= limit; j++){
+                    isPrime[i*j] = false;
+                }
+            }
+        } 
+
+        List<Integer> primes = new ArrayList<>();
+        for(int i = 2; i <= limit; i++){
+            if(isPrime[i]){
+                primes.add(i);
+            }
+        }
+        return primes;
+    }
+    private int[] findPrimeScore(List<Integer> nums){
+        int n = nums.size();
+        int[] primeScores = new int[n];
+
+        int maxEl = Collections.max(nums);
+        List<Integer> primes = getPrimes(maxEl);
+
+        for(int i = 0; i < n; i++){
+            int num = nums.get(i);
+
+            for(int prime : primes){
+                if(prime*prime > num){
+                    break;
+                }
+
+                if(num%prime != 0){
+                    continue;
+                }
+
+                while(num%prime == 0){
+                    num /= prime;
+                }
+
+                primeScores[i]++;
+            }
+
+            if(num > 1){
+                primeScores[i]++;
+            }
+        }
+        return primeScores;
+    }
+
+    private int[] findNextGreater(int[] primeScores){
+        int n = primeScores.length;
+        int[] nextGreater = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i = n-1; i>= 0; i--){
+            while(!st.isEmpty() && primeScores[st.peek()] <= primeScores[i]){
+                st.pop();
+            }
+            nextGreater[i] = st.isEmpty() ? n : st.peek();
+            st.push(i);
+        }
+        return nextGreater;
+    }
+
+    private int[] findPrevGreaterOrEqual(int[] primeScores){
+        int n = primeScores.length;
+        int[] prevGreaterOrEqual = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i =0; i < n; i++){
+            while(!st.isEmpty() && primeScores[st.peek()] < primeScores[i]){
+                st.pop();
+            }
+            prevGreaterOrEqual[i] = st.isEmpty() ? -1 : st.peek();
+            st.push(i);
+        }
+        return prevGreaterOrEqual;
+    }
+    public int maximumScore(List<Integer> nums, int k) {
+        int n = nums.size();
+        int[] primeScores = findPrimeScore(nums);
+        int[] nextGreater = findNextGreater(primeScores);
+        int[] prevGreaterOrEqual = findPrevGreaterOrEqual(primeScores);
+
+        long[] subArrays = new long[n];
+        for(int i = 0; i < n; i++){
+            subArrays[i] = (long) (nextGreater[i] - i) * (i - prevGreaterOrEqual[i]);
+        }
+
+        List<int[]> sortedNums = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            sortedNums.add(new int[]{nums.get(i), i});
+        }
+
+        Collections.sort(sortedNums, (a,b)-> Integer.compare(b[0], a[0]));
+
+        long score= 1;
+        int idx=0;
+
+        while(k > 0){
+
+            int num = sortedNums.get(idx)[0];
+            int i = sortedNums.get(idx)[1];
+
+            long ops = Math.min((long)k, subArrays[i]);
+
+            k -= ops;
+
+            score = (score * findPower(num, ops)) % MOD;
+
+            idx++;
+        }
+
+        return (int) score;
+
+    }
+}
