@@ -1,6 +1,23 @@
 /*    
     Company Tags                : Flipkart
     Leetcode Link               : https://leetcode.com/problems/count-square-submatrices-with-all-ones
+
+    
+    Logic : 
+    same as leetcode : maximal sqaure
+    
+    for top-down : 
+    we go like right, diagonal, and down means dp[i][j] = size of biggest square with A[i][j] as top-left corner
+    also means the number of square with A[i][j] as top-left corner
+    
+    for bottom-up :
+    dp[i][j] means the size of biggest square with A[i][j] as bottom-right corner.
+    dp[i][j] also means the number of squares with A[i][j] as bottom-right corner.
+    
+    If A[i][j] == 0, no possible square.
+    If A[i][j] == 1,
+    we compare the size of square dp[i-1][j-1], dp[i-1][j] and dp[i][j-1].
+    min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1 is the maximum size of square that we can find.
 */
 
 
