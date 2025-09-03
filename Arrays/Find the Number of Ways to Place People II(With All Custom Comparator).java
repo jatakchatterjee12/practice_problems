@@ -98,3 +98,103 @@ class Solution {
         return result;
     }
 };
+
+
+
+// WITH CUSTOM COMPARATOR
+class Solution {
+    public int numberOfPairs(int[][] points) {
+        
+        int n = points.length;
+        int result  = 0;
+
+        Arrays.sort(points, new Comparator<int[]>() {
+                public int compare(int[] p1, int[] p2){
+                    if(p1[0] == p2[0]){
+                        return Integer.compare(p2[1], p1[1]);
+                    }
+                    return Integer.compare(p1[0], p2[0]);
+                }
+            }
+        );
+
+        for(int i = 0; i < n; i++){
+
+            //set A, upper left
+            int x1 = points[i][0];
+            int y1 = points[i][1];
+
+            //set B, lower right
+            int maxY = Integer.MIN_VALUE;
+
+            for(int j = i+1; j < n; j++){
+
+                int x2 = points[j][0];
+                int y2 = points[j][1];
+
+                if(y2 > y1) continue;
+
+                if(y2 > maxY){
+                    result++;
+                    maxY = y2;
+                }
+                
+            }
+        }
+        return result;
+    }
+}
+
+
+// with more detailed custom comparator
+class Solution {
+    public int numberOfPairs(int[][] points) {
+        
+        int n = points.length;
+        int result  = 0;
+
+        Arrays.sort(points, new Comparator<int[]>() {
+                public int compare(int[] p1, int[] p2){
+                    if(p1[0] == p2[0]){
+                        if(p1[1] >= p2[1])return -1;
+                        return 1;
+                    }
+                    if(p1[0] < p2[0]){
+                        return -1;
+                    }
+                    else return 1;
+                    
+                }
+            }
+        );
+
+        for(int[] x : points){
+            System.out.println("$" + x[0] + "_" + x[1]);
+        }
+
+        for(int i = 0; i < n; i++){
+
+            //set A, upper left
+            int x1 = points[i][0];
+            int y1 = points[i][1];
+
+            //set B, lower right
+            int maxY = Integer.MIN_VALUE;
+
+            for(int j = i+1; j < n; j++){
+
+                int x2 = points[j][0];
+                int y2 = points[j][1];
+
+                if(y2 > y1) continue;
+
+                if(y2 > maxY){
+                    result++;
+                    maxY = y2;
+                }
+                
+            }
+        }
+        return result;
+    }
+}
