@@ -108,7 +108,7 @@ class MyCalendar {
         // Check for overlap with every existing booking
         for (int[] curr : calendar) {
             // If there is overlap, return false
-            if (!(end <= curr[0] || start >= curr[1])) {
+            if ((end > curr[0] && start < curr[1])) {
                 return false;
             }
         }
